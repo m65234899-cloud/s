@@ -139,7 +139,7 @@ __ مهام XB اليومي والاسبوعي __
 تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه
 `)
       .setColor(0x800080);
-
+      .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png");
     return interaction.reply({ embeds: [embed], ephemeral: true });
   }
 
