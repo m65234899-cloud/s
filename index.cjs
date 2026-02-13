@@ -99,7 +99,7 @@ if (content === "!نظام") {
     .setImage(
       "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
     )
-    .setColor(0x800080);
+    .setColor(0x800080); // لون بنفسجي
 
   const row = new ActionRowBuilder().addComponents(
 
@@ -120,6 +120,66 @@ if (content === "!نظام") {
     components: [row],
   });
 }
+
+// ===================== تفاعل الأزرار =====================
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isButton()) return;
+
+  // ===== زر النقاط الإدارية =====
+  if (interaction.customId === "points_admin") {
+
+    const embed = new EmbedBuilder()
+      .setTitle("📝 المهام الإدارية")
+      .setDescription(`
+__المهام الإداريه__ 
+انشاء لعبة بمنشن | 5 نقاط
+انشاء لعبة دون منشن | 1 نقطه 
+استلام تكت | 7 نقاط
+محاسبة شخص | 4 نقاط 
+مشاركه في لعبة بمنشن | 4 نقاط 
+مشاركة في لعبة دون منشن | 1 نقطه 
+
+__ مهام XB اليومي والاسبوعي __
+تحقيق 1000 XB في الشات يومي | 5 نقاط
+تحقيق 1000 XB في الصوت | 5 نقاط 
+
+تحقيق 3000 XB في الشات في الأسبوع | 13 نقطه
+تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه
+`)
+      .setImage(
+        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
+      )
+      .setColor(0x800080);
+
+    return interaction.reply({
+      embeds: [embed],
+      ephemeral: true, // فقط للشخص اللي ضغط الزر
+    });
+  }
+
+  // ===== زر الترقيات الإدارية =====
+  if (interaction.customId === "ranks_admin") {
+
+    let text = "__النقاط المطلوبة للترقيات الإدارية__\n\n";
+
+    ranks.forEach((r) => {
+      text += `<@&${r.id}> | **${r.points} نقطة**\n`;
+    });
+
+    const embed = new EmbedBuilder()
+      .setTitle("📈 الترقيات الإدارية")
+      .setDescription(text)
+      .setImage(
+        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
+      )
+      .setColor(0x800080);
+
+    return interaction.reply({
+      embeds: [embed],
+      ephemeral: true, // فقط للشخص اللي ضغط الزر
+    });
+  }
+});
   // ===================== !me =====================
   if (content === "!me") {
     const pts = data.users[message.author.id] || 0;
