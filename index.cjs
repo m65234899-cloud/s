@@ -93,26 +93,25 @@ client.on("messageCreate", async (message) => {
 
   if (message.content === "!نظام") {
     const embed = new EmbedBuilder()
-      .setTitle("## نظام الإدارة")
+      .setTitle(" نظام الإدارة")
       .setDescription(`
 • ___ نظام النقاط الكامل يوجد هنا ___
 
-• __نظام الترقيات الصغرى هنا__
+• ___نظام الترقيات الصغرى هنا___
 `)
       .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png")
       .setColor(0x800080); // لون بنفسجي
 
     const row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("points_admin")
-        .setLabel("النقاط الإدارية")
-        .setStyle(ButtonStyle.Primary),
-
-      new ButtonBuilder()
-        .setCustomId("ranks_admin")
-        .setLabel("الترقيات الإدارية")
-        .setStyle(ButtonStyle.Primary)
-    );
+  new ButtonBuilder()
+    .setCustomId("ranks_admin")
+    .setLabel("النقاط الإدارية")
+    .setStyle(ButtonStyle.Secondary), // هذا الرمادي
+  new ButtonBuilder()
+    .setCustomId("ranks_admin")
+    .setLabel("الترقيات الإدارية")
+    .setStyle(ButtonStyle.Secondary)  // هذا الرمادي
+);
 
     return message.channel.send({ embeds: [embed], components: [row] });
   }
@@ -123,8 +122,8 @@ client.on("interactionCreate", async (interaction) => {
   if (!interaction.isButton()) return;
 
   // نقاط الإدارة
-  if (interaction.customId === "points_admin") {
-    const embed = new EmbedBuilder()
+  if (interaction.customId === "ranks_admin") {
+    const ranks_admin = new EmbedBuilder()
       .setTitle("__المهام الإدارية__")
       .setDescription(`
 __المهام الإداريه__ 
@@ -152,14 +151,14 @@ __ مهام XB اليومي والاسبوعي __
     const ranksEmbed = new EmbedBuilder()
       .setTitle("__ترقيات الإدارة__")
       .setDescription(`
-1463798106586874063 | النقاط المطلوبة 90
-1458579080722255903 | النقاط المطلوبة 150
-1458579263249973258 | النقاط المطلوبة 310
-1458579380640157841 | النقاط المطلوبة 430
-1458579920325185586 | النقاط المطلوبة 720
-1464998951571947652 | النقاط المطلوبة 1000
-1464999680084672534 | النقاط المطلوبة 1300
-1465000082456707261 | النقاط المطلوبة 1700
+@1463798106586874063 | النقاط المطلوبة 90
+@1458579080722255903 | النقاط المطلوبة 150
+@1458579263249973258 | النقاط المطلوبة 310
+@1458579380640157841 | النقاط المطلوبة 430
+@1458579920325185586 | النقاط المطلوبة 720
+@1464998951571947652 | النقاط المطلوبة 1000
+@1464999680084672534 | النقاط المطلوبة 1300
+@1465000082456707261 | النقاط المطلوبة 1700
 `)
       .setColor(0x800080) // بنفسجي
       .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png");
