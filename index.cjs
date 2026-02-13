@@ -91,7 +91,7 @@ client.on("messageCreate", async (message) => {
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
-  if (message.content === "!نظام") {
+  if (message.content === "نظام") {
     const embed = new EmbedBuilder()
       .setTitle(" نظام الإدارة")
       .setDescription(`
