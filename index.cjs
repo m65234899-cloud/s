@@ -87,43 +87,39 @@ client.on("messageCreate", async (message) => {
 
   const content = message.content.trim();
 
-  // ===================== !نظام =====================
-client.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
-
-  if (message.content === "نظام") {
-    const embed = new EmbedBuilder()
-      .setTitle(" نظام الإدارة")
-      .setDescription(`
+ // ====== !نظام ======
+if (content === "!نظام") {
+  const embed = new EmbedBuilder()
+    .setTitle(" نظام الإدارة")
+    .setDescription(`
 • ___ نظام النقاط الكامل يوجد هنا ___
 
-• ___نظام الترقيات الصغرى هنا___
+• ___ نظام الترقيات الصغرى هنا ___
 `)
-      .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png")
-      .setColor(0x800080); // لون بنفسجي
+    .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png")
+    .setColor(0x800080);
 
-    const row = new ActionRowBuilder().addComponents(
-  new ButtonBuilder()
-    .setCustomId("ranks_admin")
-    .setLabel("النقاط الإدارية")
-    .setStyle(ButtonStyle.Secondary), // هذا الرمادي
-  new ButtonBuilder()
-    .setCustomId("ranks_admin")
-    .setLabel("الترقيات الإدارية")
-    .setStyle(ButtonStyle.Secondary)  // هذا الرمادي
-);
+  const row = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("points_admin")
+      .setLabel("النقاط الإدارية")
+      .setStyle(ButtonStyle.Secondary), // لون رمادي
+    new ButtonBuilder()
+      .setCustomId("ranks_admin")
+      .setLabel("الترقيات الإدارية")
+      .setStyle(ButtonStyle.Secondary)  // لون رمادي
+  );
 
-    return message.channel.send({ embeds: [embed], components: [row] });
-  }
-});
+  return message.channel.send({ embeds: [embed], components: [row] });
+}
 
-// ===================== أزرار !نظام =====================
+// ====== أزرار !نظام ======
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isButton()) return;
 
-  // نقاط الإدارة
-  if (interaction.customId === "ranks_admin") {
-    const ranks_admin = new EmbedBuilder()
+  if (interaction.customId === "points_admin") {
+    // كل الأعضاء يقدرون يشوفون المهام
+    const embed = new EmbedBuilder()
       .setTitle("__المهام الإدارية__")
       .setDescription(`
 __المهام الإداريه__ 
@@ -141,14 +137,14 @@ __ مهام XB اليومي والاسبوعي __
 تحقيق 3000 XB في الشات في الأسبوع | 13 نقطه
 تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه
 `)
-      .setColor(0x800080); // بنفسجي
+      .setColor(0x800080);
 
     return interaction.reply({ embeds: [embed], ephemeral: true });
   }
 
-  // ترقيات الإدارة
   if (interaction.customId === "ranks_admin") {
-    const ranksEmbed = new EmbedBuilder()
+    // كل الأعضاء يقدرون يشوفون الترقيات الآن
+    const embed = new EmbedBuilder()
       .setTitle("__ترقيات الإدارة__")
       .setDescription(`
 @1463798106586874063 | النقاط المطلوبة 90
@@ -160,10 +156,10 @@ __ مهام XB اليومي والاسبوعي __
 @1464999680084672534 | النقاط المطلوبة 1300
 @1465000082456707261 | النقاط المطلوبة 1700
 `)
-      .setColor(0x800080) // بنفسجي
+      .setColor(0x800080)
       .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png");
 
-    return interaction.reply({ embeds: [ranksEmbed], ephemeral: true });
+    return interaction.reply({ embeds: [embed], ephemeral: true });
   }
 });
   // ===================== !me =====================
