@@ -87,14 +87,14 @@ client.on("messageCreate", async (message) => {
 
   const content = message.content.trim();
 
- // ====== !نظام ======
+// ====== !نظام ======
 if (content === "!نظام") {
   const embed = new EmbedBuilder()
-    .setTitle(" نظام الإدارة")
+    .setTitle("## نظام الإدارة")
     .setDescription(`
-• ___ نظام النقاط الكامل يوجد هنا ___
+• ___نظام النقاط الكامل يوجد هنا___
 
-• ___ نظام الترقيات الصغرى هنا ___
+• ___نظام الترقيات الصغرى هنا___
 `)
     .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png")
     .setColor(0x800080);
@@ -103,11 +103,11 @@ if (content === "!نظام") {
     new ButtonBuilder()
       .setCustomId("points_admin")
       .setLabel("النقاط الإدارية")
-      .setStyle(ButtonStyle.Secondary), // لون رمادي
+      .setStyle(ButtonStyle.Secondary), // اللون رمادي
     new ButtonBuilder()
       .setCustomId("ranks_admin")
       .setLabel("الترقيات الإدارية")
-      .setStyle(ButtonStyle.Secondary)  // لون رمادي
+      .setStyle(ButtonStyle.Secondary)  // اللون رمادي
   );
 
   return message.channel.send({ embeds: [embed], components: [row] });
@@ -117,6 +117,7 @@ if (content === "!نظام") {
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isButton()) return;
 
+  // ==== نقاط الإدارة ====
   if (interaction.customId === "points_admin") {
     // كل الأعضاء يقدرون يشوفون المهام
     const embed = new EmbedBuilder()
@@ -142,19 +143,19 @@ __ مهام XB اليومي والاسبوعي __
     return interaction.reply({ embeds: [embed], ephemeral: true });
   }
 
+  // ==== الترقيات الإدارية ====
   if (interaction.customId === "ranks_admin") {
-    // كل الأعضاء يقدرون يشوفون الترقيات الآن
     const embed = new EmbedBuilder()
       .setTitle("__ترقيات الإدارة__")
       .setDescription(`
-@1463798106586874063 | النقاط المطلوبة 90
-@1458579080722255903 | النقاط المطلوبة 150
-@1458579263249973258 | النقاط المطلوبة 310
-@1458579380640157841 | النقاط المطلوبة 430
-@1458579920325185586 | النقاط المطلوبة 720
-@1464998951571947652 | النقاط المطلوبة 1000
-@1464999680084672534 | النقاط المطلوبة 1300
-@1465000082456707261 | النقاط المطلوبة 1700
+<@&1463798106586874063> | النقاط المطلوبة 90
+<@&1458579080722255903> | النقاط المطلوبة 150
+<@&1458579263249973258> | النقاط المطلوبة 310
+<@&1458579380640157841> | النقاط المطلوبة 430
+<@&1458579920325185586> | النقاط المطلوبة 720
+<@&1464998951571947652> | النقاط المطلوبة 1000
+<@&1464999680084672534> | النقاط المطلوبة 1300
+<@&1465000082456707261> | النقاط المطلوبة 1700
 `)
       .setColor(0x800080)
       .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png");
