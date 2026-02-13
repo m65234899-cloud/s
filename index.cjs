@@ -87,6 +87,86 @@ client.on("messageCreate", async (message) => {
 
   const content = message.content.trim();
 
+  // ===================== !نظام =====================
+client.on("messageCreate", async (message) => {
+  if (message.author.bot) return;
+
+  if (message.content === "!نظام") {
+    const embed = new EmbedBuilder()
+      .setTitle("## نظام الإدارة")
+      .setDescription(`
+• ___ نظام النقاط الكامل يوجد هنا ___
+
+• __نظام الترقيات الصغرى هنا__
+`)
+      .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png")
+      .setColor(0x800080); // لون بنفسجي
+
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("points_admin")
+        .setLabel("النقاط الإدارية")
+        .setStyle(ButtonStyle.Primary),
+
+      new ButtonBuilder()
+        .setCustomId("ranks_admin")
+        .setLabel("الترقيات الإدارية")
+        .setStyle(ButtonStyle.Primary)
+    );
+
+    return message.channel.send({ embeds: [embed], components: [row] });
+  }
+});
+
+// ===================== أزرار !نظام =====================
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isButton()) return;
+
+  // نقاط الإدارة
+  if (interaction.customId === "points_admin") {
+    const embed = new EmbedBuilder()
+      .setTitle("__المهام الإدارية__")
+      .setDescription(`
+__المهام الإداريه__ 
+انشاء لعبة بمنشن | 5 نقاط
+انشاء لعبة دون منشن | 1 نقطه 
+استلام تكت | 7 نقاط
+محاسبة شخص | 4 نقاط 
+مشاركه في لعبة بمنشن | 4 نقاط 
+مشاركة في لعبة دون منشن | 1 نقطه 
+
+__ مهام XB اليومي والاسبوعي __
+تحقيق 1000 XB في الشات يومي | 5 نقاط
+تحقيق 1000 XB في الصوت | 5 نقاط 
+
+تحقيق 3000 XB في الشات في الأسبوع | 13 نقطه
+تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه
+`)
+      .setColor(0x800080); // بنفسجي
+
+    return interaction.reply({ embeds: [embed], ephemeral: true });
+  }
+
+  // ترقيات الإدارة
+  if (interaction.customId === "ranks_admin") {
+    const ranksEmbed = new EmbedBuilder()
+      .setTitle("__ترقيات الإدارة__")
+      .setDescription(`
+1463798106586874063 | النقاط المطلوبة 90
+1458579080722255903 | النقاط المطلوبة 150
+1458579263249973258 | النقاط المطلوبة 310
+1458579380640157841 | النقاط المطلوبة 430
+1458579920325185586 | النقاط المطلوبة 720
+1464998951571947652 | النقاط المطلوبة 1000
+1464999680084672534 | النقاط المطلوبة 1300
+1465000082456707261 | النقاط المطلوبة 1700
+`)
+      .setColor(0x800080) // بنفسجي
+      .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png");
+
+    return interaction.reply({ embeds: [ranksEmbed], ephemeral: true });
+  }
+});
   // ===================== !me =====================
   if (content === "!me") {
     const pts = data.users[message.author.id] || 0;
