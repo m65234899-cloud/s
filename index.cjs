@@ -90,7 +90,7 @@ client.on("messageCreate", async (message) => {
 // ====== !نظام ======
 if (content === "!نظام") {
   const embed = new EmbedBuilder()
-    .setTitle("## نظام الإدارة")
+    .setTitle(" نظام الإدارة")
     .setDescription(`
 • ___نظام النقاط الكامل يوجد هنا___
 
@@ -116,13 +116,13 @@ if (content === "!نظام") {
 // ====== أزرار !نظام ======
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isButton()) return;
-
-  // ==== نقاط الإدارة ====
-  if (interaction.customId === "points_admin") {
-    // كل الأعضاء يقدرون يشوفون المهام
-    const embed = new EmbedBuilder()
-      .setTitle("__المهام الإدارية__")
-      .setDescription(`
+true });
+  }
+if (interaction.customId === "points_admin") {
+  // كل الأعضاء يقدرون يشوفون المهام
+  const embed = new EmbedBuilder()
+    .setTitle("__المهام الإدارية__")
+    .setDescription(`
 __المهام الإداريه__ 
 انشاء لعبة بمنشن | 5 نقاط
 انشاء لعبة دون منشن | 1 نقطه 
@@ -138,11 +138,11 @@ __ مهام XB اليومي والاسبوعي __
 تحقيق 3000 XB في الشات في الأسبوع | 13 نقطه
 تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه
 `)
-      .setColor(0x800080);
-      .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png");
-    return interaction.reply({ embeds: [embed], ephemeral: true });
-  }
+    .setColor(0x800080)
+    .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"); // أضفنا الصورة هنا
 
+  return interaction.reply({ embeds: [embed], ephemeral: true });
+}
   // ==== الترقيات الإدارية ====
   if (interaction.customId === "ranks_admin") {
     const embed = new EmbedBuilder()
