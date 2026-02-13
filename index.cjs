@@ -87,43 +87,46 @@ client.on("messageCreate", async (message) => {
 
   const content = message.content.trim();
 
-// ====== !نظام ======
-if (content === "!نظام") {
+// ====== أمر !نظام ======
+if (message.content === "!نظام") {
   const embed = new EmbedBuilder()
     .setTitle(" نظام الإدارة")
-    .setDescription(`
-• ___نظام النقاط الكامل يوجد هنا___
-
-• ___نظام الترقيات الصغرى هنا___
-`)
-    .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png")
+    .setDescription(
+      `• ___نظام النقاط الكامل يوجد هنا___\n\n• ___نظام الترقيات الصغرى هنا___`
+    )
+    .setImage(
+      "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
+    )
     .setColor(0x800080);
 
   const row = new ActionRowBuilder().addComponents(
     new ButtonBuilder()
       .setCustomId("points_admin")
       .setLabel("النقاط الإدارية")
-      .setStyle(ButtonStyle.Secondary), // اللون رمادي
+      .setStyle(ButtonStyle.Secondary),
+
     new ButtonBuilder()
       .setCustomId("ranks_admin")
       .setLabel("الترقيات الإدارية")
-      .setStyle(ButtonStyle.Secondary)  // اللون رمادي
+      .setStyle(ButtonStyle.Secondary)
   );
 
-  return message.channel.send({ embeds: [embed], components: [row] });
+  await message.channel.send({
+    embeds: [embed],
+    components: [row],
+  });
 }
 
-// ====== أزرار !نظام ======
+// ====== نظام الأزرار بالكامل ======
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isButton()) return;
-true });
-  }
-if (interaction.customId === "points_admin") {
-  // كل الأعضاء يقدرون يشوفون المهام
-  const embed = new EmbedBuilder()
-    .setTitle("__المهام الإدارية__")
-    .setDescription(`
-__المهام الإداريه__ 
+
+  // زر النقاط الإدارية
+  if (interaction.customId === "points_admin") {
+    const embed = new EmbedBuilder()
+      .setTitle("__المهام الإدارية__")
+      .setDescription(
+        `__المهام الإداريه__ 
 انشاء لعبة بمنشن | 5 نقاط
 انشاء لعبة دون منشن | 1 نقطه 
 استلام تكت | 7 نقاط
@@ -136,31 +139,42 @@ __ مهام XB اليومي والاسبوعي __
 تحقيق 1000 XB في الصوت | 5 نقاط 
 
 تحقيق 3000 XB في الشات في الأسبوع | 13 نقطه
-تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه
-`)
-    .setColor(0x800080)
-    .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"); // أضفنا الصورة هنا
+تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه`
+      )
+      .setImage(
+        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
+      )
+      .setColor(0x800080);
 
-  return interaction.reply({ embeds: [embed], ephemeral: true });
-}
-  // ==== الترقيات الإدارية ====
+    return interaction.reply({
+      embeds: [embed],
+      ephemeral: true,
+    });
+  }
+
+  // زر الترقيات الإدارية
   if (interaction.customId === "ranks_admin") {
     const embed = new EmbedBuilder()
       .setTitle("__ترقيات الإدارة__")
-      .setDescription(`
-<@&1463798106586874063> | النقاط المطلوبة 90
+      .setDescription(
+        `<@&1463798106586874063> | النقاط المطلوبة 90
 <@&1458579080722255903> | النقاط المطلوبة 150
 <@&1458579263249973258> | النقاط المطلوبة 310
 <@&1458579380640157841> | النقاط المطلوبة 430
 <@&1458579920325185586> | النقاط المطلوبة 720
 <@&1464998951571947652> | النقاط المطلوبة 1000
 <@&1464999680084672534> | النقاط المطلوبة 1300
-<@&1465000082456707261> | النقاط المطلوبة 1700
-`)
-      .setColor(0x800080)
-      .setImage("https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png");
+<@&1465000082456707261> | النقاط المطلوبة 1700`
+      )
+      .setImage(
+        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
+      )
+      .setColor(0x800080);
 
-    return interaction.reply({ embeds: [embed], ephemeral: true });
+    return interaction.reply({
+      embeds: [embed],
+      ephemeral: true,
+    });
   }
 });
   // ===================== !me =====================
