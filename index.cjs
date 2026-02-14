@@ -20,7 +20,8 @@ const fs = require("fs");
 
 // ========== إعدادات ==========
 const config = {
-  TOKEN: "MTQ1ODg4MzQzMjE1NDE0MDc4NA.GDePJM.mAwYGJtrE2EY5V6GP_R4ska9PG7mxOG--fdT1c",
+  // التوكن مخفي عندك
+  TOKEN: process.env.BOT_TOKEN, // حط سكرتك هنا أو في متغير البيئة
 
   // رتبة عليا جديدة للأمر !
   highRole: "1462405819294290013",
@@ -86,91 +87,37 @@ client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
   const content = message.content.trim();
-// ===================== !نظام =====================
-if (content === "!نظام") {
-  const embed = new EmbedBuilder()
-    .setTitle("نظام الإدارة")
-    .setDescription(
-      `• __نظام النقاط الكامل يوجد هنا__\n• __نظام الترقيات الصغرى هنا__`
-    )
-    .setImage(
-      "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
-    )
-    .setColor(0x800080); // لون بنفسجي
 
-  const row = new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId("points_admin")
-      .setLabel("النقاط الإدارية")
-      .setStyle(ButtonStyle.Secondary),
-
-    new ButtonBuilder()
-      .setCustomId("ranks_admin")
-      .setLabel("الترقيات الإدارية")
-      .setStyle(ButtonStyle.Secondary)
-  );
-
-  return message.channel.send({
-    embeds: [embed],
-    components: [row],
-  });
-}
-
-// ===================== الأزرار الخاصة بـ !نظام =====================
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isButton()) return;
-
-  // ===== نقاط إدارية =====
-  if (interaction.customId === "points_admin") {
+  // ===================== !نظام =====================
+  if (content === "!نظام") {
     const embed = new EmbedBuilder()
-      .setTitle("📝 المهام اليومية والإدارية")
-      .setDescription(`
-__المهام الإداريه__
-انشاء لعبة بمنشن | 5 نقاط
-انشاء لعبة دون منشن | 1 نقطه
-استلام تكت | 7 نقاط
-محاسبة شخص | 4 نقاط
-مشاركه في لعبة بمنشن | 4 نقاط
-مشاركة في لعبة دون منشن | 1 نقطه
-
-__مهام XB اليومي والاسبوعي__
-تحقيق 1000 XB في الشات يومي | 5 نقاط
-تحقيق 1000 XB في الصوت | 5 نقاط
-تحقيق 3000 XB في الشات في الأسبوع | 13 نقطه
-تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه
-`)
+      .setTitle("نظام الإدارة")
+      .setDescription(
+        `• __نظام النقاط الكامل يوجد هنا__\n• __نظام الترقيات الصغرى هنا__`
+      )
       .setImage(
         "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
       )
-      .setColor(0x808080); // لون رمادي
+      .setColor(0x800080); // لون بنفسجي
 
-    return interaction.reply({
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("points_admin")
+        .setLabel("النقاط الإدارية")
+        .setStyle(ButtonStyle.Secondary),
+
+      new ButtonBuilder()
+        .setCustomId("ranks_admin")
+        .setLabel("الترقيات الإدارية")
+        .setStyle(ButtonStyle.Secondary)
+    );
+
+    return message.channel.send({
       embeds: [embed],
-      ephemeral: true, // يشوفه الشخص فقط
+      components: [row],
     });
   }
 
-  // ===== ترقيات إدارية =====
-  if (interaction.customId === "ranks_admin") {
-    let text = "";
-    ranks.forEach((r) => {
-      text += `<@&${r.id}> | **${r.points} نقطة**\n`;
-    });
-
-    const embed = new EmbedBuilder()
-      .setTitle("📈 الترقيات الإدارية")
-      .setDescription(text)
-      .setImage(
-        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
-      )
-      .setColor(0x808080); // لون رمادي
-
-    return interaction.reply({
-      embeds: [embed],
-      ephemeral: true,
-    });
-  }
-});
   // ===================== !me =====================
   if (content === "!me") {
     const pts = data.users[message.author.id] || 0;
@@ -184,67 +131,7 @@ __مهام XB اليومي والاسبوعي__
       .setColor(0x00ffff);
     return message.channel.send({ embeds: [embed] });
   }
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isButton()) return;
 
-  // ===== زر النقاط =====
-  if (interaction.customId === "points_admin") {
-
-    const embed = new EmbedBuilder()
-      .setTitle("المهام الإدارية")
-      .setDescription(
-        `__المهام الإداريه__ 
-انشاء لعبة بمنشن | 5 نقاط
-انشاء لعبة دون منشن | 1 نقطه 
-استلام تكت | 7 نقاط
-محاسبة شخص | 4 نقاط 
-مشاركه في لعبة بمنشن | 4 نقاط 
-مشاركة في لعبة دون منشن | 1 نقطه 
-
-__ مهام XB اليومي والاسبوعي __
-تحقيق 1000 XB في الشات يومي | 5 نقاط
-تحقيق 1000 XB في الصوت | 5 نقاط 
-
-تحقيق 3000 XB في الشات في الأسبوع | 13 نقطه
-تحقيق 3000 XB في الصوت في الأسبوع | 13 نقطه`
-      )
-      .setImage(
-        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
-      )
-      .setColor(0x800080);
-
-    return interaction.reply({
-      embeds: [embed],
-      ephemeral: true,
-    });
-  }
-
-  // ===== زر الترقيات =====
-  if (interaction.customId === "ranks_admin") {
-
-    const embed = new EmbedBuilder()
-      .setTitle("النقاط المطلوبة للترقية")
-      .setDescription(
-        `<@&1463798106586874063> | 90 نقطة  
-<@&1458579080722255903> | 150 نقطة  
-<@&1458579263249973258> | 310 نقطة  
-<@&1458579380640157841> | 430 نقطة  
-<@&1458579920325185586> | 720 نقطة  
-<@&1464998951571947652> | 1000 نقطة  
-<@&1464999680084672534> | 1300 نقطة  
-<@&1465000082456707261> | 1700 نقطة`
-      )
-      .setImage(
-        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
-      )
-      .setColor(0x800080);
-
-    return interaction.reply({
-      embeds: [embed],
-      ephemeral: true,
-    });
-  }
-});
   // ===================== !ترقيات =====================
   if (content === "!ترقيات") {
     let text = "__النقاط المطلوبه للترقيه__\n\n";
@@ -256,7 +143,7 @@ __ مهام XB اليومي والاسبوعي __
       .setTitle("📈 ترقيات الإدارة")
       .setDescription(text)
       .setImage(
-        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png?ex=6990e04e&is=698f8ece&hm=a214bfbf2e84cabe97377a55c0be320493a9ef3d7dab876d5f97e9feffdcc15f&"
+        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
       )
       .setColor(0x8000ff); // لون بنفسجي
 
@@ -284,7 +171,7 @@ __مهام XB اليومي والاسبوعي__
 `)
       .setColor(0x8000ff)
       .setImage(
-        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png?ex=6990e04e&is=698f8ece&hm=a214bfbf2e84cabe97377a55c0be320493a9ef3d7dab876d5f97e9feffdcc15f&"
+        "https://cdn.discordapp.com/attachments/1471960920547917944/1471972058177994866/IMG_7552.png"
       );
 
     return message.channel.send({ embeds: [embed] });
